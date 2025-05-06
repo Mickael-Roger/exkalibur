@@ -3,7 +3,7 @@ import math
 
 geod = Geodesic.WGS84
 
-def compute_cross_positions(AB, CD, AX, CX, angle_axb_deg, E, F, EX):
+def compute_cross_positions(AB, CD, AX, CX, angle_axc_deg, E, F, EX):
     if AB <= AX:
         raise ValueError("AB doit être plus grand que AX")
     if CD < CX:
@@ -27,7 +27,7 @@ def compute_cross_positions(AB, CD, AX, CX, angle_axb_deg, E, F, EX):
 
     # 4. Calcul des deux orientations possibles pour AB
     solutions = []
-    for angle_offset in [angle_axb_deg, -angle_axb_deg]:
+    for angle_offset in [angle_axc_deg, -angle_axc_deg]:
         # Calcul de l'azimut de AB
         ab_azimuth = (ef_azimuth + angle_offset) % 360
         
@@ -51,18 +51,36 @@ def compute_cross_positions(AB, CD, AX, CX, angle_axb_deg, E, F, EX):
 
 # Exemple d'utilisation
 if __name__ == "__main__":
-    E = (50.66728, -4.7585)  # Tintagel
-    F = (51.49936, -0.12729)  # Westminster abbye
+
+    print("Valeurs :\n")
+
+    AB = float(input("Longueur AB en m: "))
+    CD = float(input("Longueur CD en m: "))
+    AX = float(input("Distance AX en m: "))
+    CX = float(input("Distance CX en m: "))
+    angle_axc_deg = float(input("Angle AXC en ° : "))
     
+    print("\nCoordonnées GPS du point E :")
+    e_lat = float(input("Latitude E: "))
+    e_lon = float(input("Longitude E: "))
+    E = (e_lat, e_lon)
+    
+    print("\nCoordonnées GPS du point F :")
+    f_lat = float(input("Latitude F: "))
+    f_lon = float(input("Longitude F: "))
+    F = (f_lat, f_lon)
+    
+    EX = float(input("\nDistance EX en m: "))
+
     result = compute_cross_positions(
-        AB=2008537,
-        CD=605605,
-        AX=1632276,
-        CX=226746,
-        angle_axb_deg=84.81,
+        AB=AB,
+        CD=CD,
+        AX=AX,
+        CX=CX,
+        angle_axc_deg=angle_axc_deg,
         E=E,
         F=F,
-        EX=154000
+        EX=EX
     )
 
     print("Point X:", result['X'])
