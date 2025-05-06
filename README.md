@@ -23,7 +23,7 @@ Longueur CD: 506877.27 m
 ```
 
 
-## Translation
+## Translation
 
 ```
 python3 move.py
