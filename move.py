@@ -49,7 +49,6 @@ def compute_cross_positions(AB, CD, AX, CX, angle_axc_deg, E, F, EX):
         'solution2': {'A': solutions[1][0], 'B': solutions[1][1]}
     }
 
-# Exemple d'utilisation
 if __name__ == "__main__":
 
     print("Valeurs :\n")
