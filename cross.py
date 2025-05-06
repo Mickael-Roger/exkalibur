@@ -2,7 +2,7 @@ import math
 import argparse
 import ast
 
-EARTH_RADIUS = 6371000  # Rayon moyen en mètres
+EARTH_RADIUS = 6377800  # Rayon moyen en mètres en europe de l'ouest
 
 def cross(a, b):
     return (
@@ -35,7 +35,7 @@ def vector_to_gps(v):
 def calculate_distance(v1, v2):
     """Calcule la distance entre deux points sur la sphère unitaire"""
     dot_product = dot(v1, v2)
-    dot_product = max(min(dot_product, 1.0), -1.0)  # Clamp pour éviter les erreurs numériques
+    dot_product = max(min(dot_product, 1.0), -1.0)
     central_angle = math.acos(dot_product)
     return EARTH_RADIUS * central_angle
 
